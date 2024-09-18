@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NextWaveEdu.Devfreela.API.Models.Project;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -24,19 +25,17 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/projecets
         [HttpPost]
-        public IActionResult Post([FromBody] object input)
+        public IActionResult Post([FromBody] CreateProjectModel input)
         {
             //return BadRequest();
 
             // Cadastrar o Projeto
-
-            var projectCreatedId = 1;
-            return Created(nameof(GetById), new { projectCreatedId });
+            return Created(nameof(GetById), new { id = input.Id });
         }
 
         // api/projects/1
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] object updateInput)
+        public IActionResult Put(int id, [FromBody] UpdateProjectModel input)
         {
             // Atualizar o Projeot pelo Id
 
@@ -50,6 +49,27 @@ namespace NextWaveEdu.Devfreela.API.Controllers
             //return NotFound();
 
             // Remoção do id
+            return NoContent();
+        }
+
+        // api/projects/1/comments
+        [HttpPost("{id}/comments")]
+        public IActionResult PostCommet(int id, [FromBody] CreateCommentModel createComment)
+        {
+            return NoContent();
+        }
+
+        // api/projects/1/start
+        [HttpPut("{id}/start")]
+        public IActionResult Start(int id)
+        {
+            return NoContent();
+        }
+
+        // api/projects/1/finish
+        [HttpPut("{id}")]
+        public IActionResult Finish(int id)
+        {
             return NoContent();
         }
     }
