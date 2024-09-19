@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using NextWaveEdu.Devfreela.API.Constants;
 using NextWaveEdu.Devfreela.API.Models.Project;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
@@ -7,6 +9,13 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
+        private readonly OpeningTimeOption _option;
+
+        public ProjectsController(IOptions<OpeningTimeOption> option)
+        {
+            _option = option.Value;
+        }
+
         // api/projects?query=aspnetcore
         [HttpGet]
         public IActionResult Get(string query)
