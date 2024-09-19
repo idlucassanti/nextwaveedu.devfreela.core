@@ -1,3 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
+using NextWaveEdu.Devfreela.API.Constants;
+
 namespace NextWaveEdu.Devfreela.API
 {
     public class Program
@@ -7,6 +10,8 @@ namespace NextWaveEdu.Devfreela.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
