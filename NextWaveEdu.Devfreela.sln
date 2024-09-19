@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71D469E6-FD1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextWaveEdu.Devfreela.API", "src\NextWaveEdu.Devfreela.API\NextWaveEdu.Devfreela.API.csproj", "{A4F39303-289B-4B19-80EC-7E0B6416C8E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextWaveEdu.Devfreela.Domain", "src\NextWaveEdu.Devfreela.Domain\NextWaveEdu.Devfreela.Domain.csproj", "{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{A4F39303-289B-4B19-80EC-7E0B6416C8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F39303-289B-4B19-80EC-7E0B6416C8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F39303-289B-4B19-80EC-7E0B6416C8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A4F39303-289B-4B19-80EC-7E0B6416C8E8} = {71D469E6-FD17-4709-90FA-522EEB6F6732}
+		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4} = {71D469E6-FD17-4709-90FA-522EEB6F6732}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7991684-A3F1-45BC-9253-B3F38B8191E4}
