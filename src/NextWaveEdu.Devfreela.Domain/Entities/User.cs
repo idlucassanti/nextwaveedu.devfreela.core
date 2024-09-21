@@ -4,14 +4,14 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
 {
     public class User : Entity
     {
-        public User(string name, string email, string password, DateTime birthDate, bool active, DateTime createdAt)
+        public User(string name, string email, string password, DateTime birthDate)
         {
             Name = name;
             Email = email;
             Password = password;
             BirthDate = birthDate;
-            Active = active;
-            CreatedAt = createdAt;
+            Active = true;
+            CreatedAt = DateTime.Now;
             Skills = new List<UserSkill>();
             OwnerProjects = new List<Project>();
             FreelaProjects = new List<Project>();

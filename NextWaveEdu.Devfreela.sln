@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71D469E6-FD17-4709-90FA-522EEB6F6732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextWaveEdu.Devfreela.API", "src\NextWaveEdu.Devfreela.API\NextWaveEdu.Devfreela.API.csproj", "{A4F39303-289B-4B19-80EC-7E0B6416C8E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextWaveEdu.Devfreela.API", "src\NextWaveEdu.Devfreela.API\NextWaveEdu.Devfreela.API.csproj", "{A4F39303-289B-4B19-80EC-7E0B6416C8E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextWaveEdu.Devfreela.Domain", "src\NextWaveEdu.Devfreela.Domain\NextWaveEdu.Devfreela.Domain.csproj", "{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextWaveEdu.Devfreela.Domain", "src\NextWaveEdu.Devfreela.Domain\NextWaveEdu.Devfreela.Domain.csproj", "{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextWaveEdu.Devfreela.Infrastructure", "src\NextWaveEdu.Devfreela.Infrastructure\NextWaveEdu.Devfreela.Infrastructure.csproj", "{6A769CA5-F29F-4990-9257-4E3E8EBC4935}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A769CA5-F29F-4990-9257-4E3E8EBC4935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A769CA5-F29F-4990-9257-4E3E8EBC4935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A769CA5-F29F-4990-9257-4E3E8EBC4935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A769CA5-F29F-4990-9257-4E3E8EBC4935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A4F39303-289B-4B19-80EC-7E0B6416C8E8} = {71D469E6-FD17-4709-90FA-522EEB6F6732}
 		{BB889F04-4B38-46B9-BF6E-912D9AEC5ED4} = {71D469E6-FD17-4709-90FA-522EEB6F6732}
+		{6A769CA5-F29F-4990-9257-4E3E8EBC4935} = {71D469E6-FD17-4709-90FA-522EEB6F6732}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7991684-A3F1-45BC-9253-B3F38B8191E4}
