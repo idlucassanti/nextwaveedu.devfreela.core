@@ -20,7 +20,6 @@ namespace NextWaveEdu.Devfreela.API
             builder.Services.AddDbContext<DevfreelaDbContext>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             
-            builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ISkillService, SkillService>();
             builder.Services.AddScoped<IUserService, UserService>();
 

@@ -10,7 +10,6 @@ using NextWaveEdu.Devfreela.Application.Commands.Project.StartProject;
 using NextWaveEdu.Devfreela.Application.Commands.Project.UpdateProject;
 using NextWaveEdu.Devfreela.Application.Queries.Project.GetAllProject;
 using NextWaveEdu.Devfreela.Application.Queries.Project.GetByIdProject;
-using NextWaveEdu.Devfreela.Application.Services.Interfaces;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -19,13 +18,11 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly OpeningTimeOption _option;
-        private readonly IProjectService _projectService;
         private readonly IMediator _mediator;
        
-        public ProjectsController(IOptions<OpeningTimeOption> option, IProjectService projectService, IMediator mediator)
+        public ProjectsController(IOptions<OpeningTimeOption> option, IMediator mediator)
         {
             _option = option.Value;
-            _projectService = projectService;
             _mediator = mediator;
         }
 
