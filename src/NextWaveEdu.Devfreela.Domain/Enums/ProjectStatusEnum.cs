@@ -2,7 +2,7 @@
 {
     public enum ProjectStatusEnum
     {
-        Created,
+        Created = 1,
         InProgress,
         Cancelled,
         Finished

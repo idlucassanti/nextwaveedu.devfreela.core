@@ -8,23 +8,23 @@ namespace NextWaveEdu.Devfreela.Infrastructure.Persistence
         {
             Projects = new List<Project>
             {
-                new Project("Projeto 1", "Descrição projeto 1", 1000, 1, 1),
-                new Project("Projeto 2", "Descrição projeto 2", 2000, 1, 1),
-                new Project("Projeto 3", "Descrição projeto 3", 3000, 1, 1),
+                new Project(1, "Sancati Web", "Projeto web desenvolvimento em ReactJs", 1000, 1, 1),
+                new Project(2, "Sancati Core", "Projeto backend desenvolvimento em .NET Core", 2000, 2, 1),
+                new Project(3, "Sancati Mobile", "Projeto mobile desenvolvimento em React Native", 3000, 3, 1),
             };
 
             Users = new List<User>
             {
-                new User("User 1", "email@user1.com", "123", new DateTime(1997, 1,1)),
-                new User("User 2", "email@user2.com", "123", new DateTime(1997, 1,1)),
-                new User("User 3", "email@user3.com", "123", new DateTime(1997, 1,1)),
+                new User(1, "Lucas Santi", "lucas@sancati.com", "123", new DateTime(1997, 1, 1)),
+                new User(2, "Dyovana Kerly Moura Santi", "dyo@sancati.com", "123", new DateTime(1998, 1, 1)),
+                new User(3, "Matteo Moura Santi", "matteo@sancati.com", "123", new DateTime(2023, 3, 30)),
             };
 
             Skills = new List<Skill>
             {
-                new Skill(".NET Core"),
-                new Skill("ReactJS"),
-                new Skill("React Native"),
+                new Skill(1, ".NET Core"),
+                new Skill(2, "ReactJS"),
+                new Skill(3, "React Native"),
             };
         }
 

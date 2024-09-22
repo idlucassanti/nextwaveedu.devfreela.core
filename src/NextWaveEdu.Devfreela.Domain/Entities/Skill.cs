@@ -4,8 +4,9 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
 {
     public class Skill : Entity
     {
-        public Skill(string description)
+        public Skill(int id, string description)
         {
+            Id = id;
             Description = description;
             CreatedAt = DateTime.Now;
         }

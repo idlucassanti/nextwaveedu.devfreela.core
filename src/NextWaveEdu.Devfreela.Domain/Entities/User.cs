@@ -4,8 +4,9 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
 {
     public class User : Entity
     {
-        public User(string name, string email, string password, DateTime birthDate)
+        public User(int id, string name, string email, string password, DateTime birthDate)
         {
+            Id = id;
             Name = name;
             Email = email;
             Password = password;
