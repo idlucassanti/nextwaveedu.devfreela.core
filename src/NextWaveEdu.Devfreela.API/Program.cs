@@ -18,6 +18,8 @@ namespace NextWaveEdu.Devfreela.API
 
             builder.Services.AddSingleton<DevfreelaDbContext>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<ISkillService, SkillService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
