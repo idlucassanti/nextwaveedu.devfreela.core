@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NextWaveEdu.Devfreela.Application.InputModels.Skill;
-using NextWaveEdu.Devfreela.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using NextWaveEdu.Devfreela.Application.Queries.Skill.GetAllSkill;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -8,32 +8,25 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        private readonly ISkillService _skillService;
+        private readonly IMediator _mediator;
 
-        public SkillsController(ISkillService skillService)
+        public SkillsController(IMediator _mediator)
         {
-            _skillService = skillService;
+            _mediator = _mediator;
         }
 
         // api/skills
         [HttpGet]
         public IActionResult Get()
         {
-            var response = _skillService.Get();
+            var query = new GetAllSkillQuery();
+
+            var response = _mediator.Send(query);
 
             if (response is null)
                 return NoContent();
 
             return Ok(response);
-        }
-
-        // api/skills
-        [HttpPost]
-        public IActionResult Create([FromBody] CreateSkillInputModel input)
-        {
-            var responseId = _skillService.Create(input);
-
-            return CreatedAtAction(nameof(Get), new { id = responseId }, input);
         }
     }
 }

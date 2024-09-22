@@ -19,8 +19,6 @@ namespace NextWaveEdu.Devfreela.API
 
             builder.Services.AddDbContext<DevfreelaDbContext>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            
-            builder.Services.AddScoped<ISkillService, SkillService>();
 
             builder.Services.AddMediatR(options => options.RegisterServicesFromAssembly(typeof(CreateProjectCommand).Assembly));
 
