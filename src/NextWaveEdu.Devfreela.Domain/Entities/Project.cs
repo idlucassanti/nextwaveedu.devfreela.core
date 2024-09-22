@@ -5,9 +5,8 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
 {
     public class Project : Entity
     {
-        public Project(int id, string title, string description, decimal totalCost, int ownerId, int freelancerId)
+        public Project(string title, string description, decimal totalCost, int ownerId, int freelancerId)
         {
-            Id = id;
             Title = title;
             Description = description;
             CreatedAt = DateTime.Now;

@@ -17,15 +17,13 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
         public int Create(CreateSkillInputModel input)
         {
-            var id = _dbContext.Skills.Max(x => x.Id) + 1;
-
-            var skill = new Skill(id, input.Description);
+            var skill = new Skill(input.Description);
 
             _dbContext.Skills.Add(skill);
 
             _dbContext.SaveChanges();
 
-            return id;
+            return skill.Id;
         }
 
         public List<SkillViewModel> Get()

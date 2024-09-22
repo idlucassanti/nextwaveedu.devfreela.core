@@ -17,15 +17,13 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
         public int Create(CreateUserInputModel input)
         {
-            var userId = _dbContext.Users.Max(x => x.Id) + 1;
-
-            var user = new User(userId, input.Name, input.Email, input.Password, input.BirthDate);
+            var user = new User(input.Name, input.Email, input.Password, input.BirthDate);
 
             _dbContext.Users.Add(user);
 
             _dbContext.SaveChanges();
 
-            return userId;
+            return user.Id;
         }
 
         public UserViewModel GetById(int id)

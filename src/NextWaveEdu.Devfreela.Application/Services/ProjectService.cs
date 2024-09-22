@@ -17,9 +17,7 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
         public int Create(CreateProjectInputModel input)
         {
-            var id = _dbContext.Projects.Max(x => x.Id) + 1;
-
-            var project = new Project(id, input.Title, input.Description, input.TotalCost, input.OwnerId, input.FreelancerId);
+            var project = new Project(input.Title, input.Description, input.TotalCost, input.OwnerId, input.FreelancerId);
             
             _dbContext.Projects.Add(project);
 
