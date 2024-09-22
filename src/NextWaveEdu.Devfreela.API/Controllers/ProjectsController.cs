@@ -1,7 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NextWaveEdu.Devfreela.API.Constants;
-using NextWaveEdu.Devfreela.Application.InputModels.Project;
+using NextWaveEdu.Devfreela.Application.Commands.Project.CreateComment;
+using NextWaveEdu.Devfreela.Application.Commands.Project.CreateProject;
+using NextWaveEdu.Devfreela.Application.Commands.Project.DeleteProject;
+using NextWaveEdu.Devfreela.Application.Commands.Project.FinishProject;
+using NextWaveEdu.Devfreela.Application.Commands.Project.StartProject;
+using NextWaveEdu.Devfreela.Application.Commands.Project.UpdateProject;
+using NextWaveEdu.Devfreela.Application.Queries.Project.GetAllProject;
+using NextWaveEdu.Devfreela.Application.Queries.Project.GetByIdProject;
 using NextWaveEdu.Devfreela.Application.Services.Interfaces;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
@@ -12,26 +20,33 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     {
         private readonly OpeningTimeOption _option;
         private readonly IProjectService _projectService;
-
-        public ProjectsController(IOptions<OpeningTimeOption> option, IProjectService projectService)
+        private readonly IMediator _mediator;
+       
+        public ProjectsController(IOptions<OpeningTimeOption> option, IProjectService projectService, IMediator mediator)
         {
             _option = option.Value;
             _projectService = projectService;
+            _mediator = mediator;
         }
 
-        // api/projects?query=aspnetcore
+        // api/projects?filter=aspnetcore
         [HttpGet]
-        public IActionResult Get(string? query)
+        public async Task<IActionResult> Get(string? filter)
         {
-            var response = _projectService.Get(query);
+            var query = new GetAllProjectQuery(filter);
+            
+            var response = _mediator.Send(query);
+            
             return Ok(response);
         }
 
         // api/projects/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var response = _projectService.GetById(id);
+            var query = new GetByIdProjectQuery(id);
+
+            var response = _mediator.Send(query);
             
             if (response is null)
                 return NotFound();
@@ -41,57 +56,65 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/projects
         [HttpPost]
-        public IActionResult Create([FromBody] CreateProjectInputModel input)
+        public async Task<IActionResult> Create([FromBody] CreateProjectCommand command)
         {
-            //return BadRequest();
+            var responseId = _mediator.Send(command);
 
-            var responseId = _projectService.Create(input);
-
-            // Cadastrar o Projeto
-            return Created(nameof(GetById), new { id = responseId });
+            return CreatedAtAction(nameof(GetById), new { id = responseId }, command);
         }
 
         // api/projects/1
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateProjectInputModel input)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
         {
-            _projectService.Update(id, input);
+            command.Id = id;
+
+            await _mediator.Send(command);
 
             return NoContent();
         }
 
         // api/projects/1
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _projectService.Delete(id);
-            return NoContent();
+            var command = new DeleteProjectCommand(id);
             
-            //return NotFound();
+            await _mediator.Send(command);
+            
+            return NoContent();
         }
 
         // api/projects/1/comments
         [HttpPost("{id}/comments")]
-        public IActionResult CreateCommet(int id, [FromBody] CreateCommentInputModel input)
+        public async Task<IActionResult> CreateCommet(int id, [FromBody] CreateCommentCommand command)
         {
-            _projectService.CreateComment(id, input);
+            command.ProjectId = id;
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         // api/projects/1/start
         [HttpPut("{id}/start")]
-        public IActionResult Start(int id)
+        public async Task<IActionResult> Start(int id)
         {
-            _projectService.Start(id);
-            
+            var command = new StartProjectCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
         // api/projects/1/finish
         [HttpPut("{id}/finish")]
-        public IActionResult Finish(int id)
+        public async Task<IActionResult> Finish(int id)
         {
-            _projectService.Finish(id);
+            var command = new FinishProjectCommand(id);
+
+            await _mediator.Send(command);
+
             return NoContent();
         }
     }
