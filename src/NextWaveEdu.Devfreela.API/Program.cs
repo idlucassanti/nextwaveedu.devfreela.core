@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NextWaveEdu.Devfreela.API.Constants;
 using NextWaveEdu.Devfreela.Application.Services;
@@ -16,7 +17,9 @@ namespace NextWaveEdu.Devfreela.API
 
             builder.Services.Configure<OpeningTimeOption>(builder.Configuration.GetSection("OpeningTime"));
 
-            builder.Services.AddSingleton<DevfreelaDbContext>();
+            builder.Services.AddDbContext<DevfreelaDbContext>(options => 
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ISkillService, SkillService>();
             builder.Services.AddScoped<IUserService, UserService>();
