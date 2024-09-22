@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NextWaveEdu.Devfreela.Application.ViewModels.User;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
@@ -15,7 +16,7 @@ namespace NextWaveEdu.Devfreela.Application.Commands.User.LoginUser
 
         public async Task<UserAuthViewModel> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _dbContext.Users.SingleOrDefault(x => x.Email == request.Email && x.Password == request.Password);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(x => x.Email == request.Email && x.Password == request.Password);
 
             if (user is null)
                 return null;

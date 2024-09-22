@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Entity = NextWaveEdu.Devfreela.Domain.Entities;
+using NextWaveEdu.Devfreela.Domain.Entities;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
 namespace NextWaveEdu.Devfreela.Application.Commands.Project.CreateComment
@@ -16,16 +16,16 @@ namespace NextWaveEdu.Devfreela.Application.Commands.Project.CreateComment
 
         public async Task<int> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContexnt.Projects.SingleOrDefault(x => x.Id == request.ProjectId);
+            var project = await _dbContexnt.Projects.SingleOrDefaultAsync(x => x.Id == request.ProjectId);
 
             if (project is null)
                 throw new Exception();
 
-            var comment = new Entity.Comment(request.Content, request.ProjectId, request.UserId);
+            var comment = new Comment(request.Content, request.ProjectId, request.UserId);
 
-            _dbContexnt.Comments.Add(comment);
+            await _dbContexnt.Comments.AddAsync(comment);
 
-            _dbContexnt.SaveChanges();
+            await _dbContexnt.SaveChangesAsync();
 
             return comment.Id;
         }

@@ -32,7 +32,7 @@ namespace NextWaveEdu.Devfreela.API.Controllers
         {
             var query = new GetAllProjectQuery(filter);
             
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
             
             return Ok(response);
         }
@@ -43,7 +43,7 @@ namespace NextWaveEdu.Devfreela.API.Controllers
         {
             var query = new GetByIdProjectQuery(id);
 
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
             
             if (response is null)
                 return NotFound();
@@ -55,7 +55,7 @@ namespace NextWaveEdu.Devfreela.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateProjectCommand command)
         {
-            var responseId = _mediator.Send(command);
+            var responseId = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = responseId }, command);
         }

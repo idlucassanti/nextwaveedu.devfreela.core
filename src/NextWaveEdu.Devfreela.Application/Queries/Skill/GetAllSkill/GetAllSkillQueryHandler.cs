@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NextWaveEdu.Devfreela.Application.ViewModels.Skill;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
@@ -20,7 +21,7 @@ namespace NextWaveEdu.Devfreela.Application.Queries.Skill.GetAllSkill
             if (skills == null)
                 return null;
 
-            var skillsViewModel = skills.Select(x => new SkillViewModel(x.Id, x.Description, x.CreatedAt)).ToList();
+            var skillsViewModel = await skills.Select(x => new SkillViewModel(x.Id, x.Description, x.CreatedAt)).ToListAsync();
 
             return skillsViewModel;
         }

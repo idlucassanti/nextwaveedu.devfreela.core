@@ -10,18 +10,18 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     {
         private readonly IMediator _mediator;
 
-        public SkillsController(IMediator _mediator)
+        public SkillsController(IMediator mediator)
         {
-            _mediator = _mediator;
+            _mediator = mediator;
         }
 
         // api/skills
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
             var query = new GetAllSkillQuery();
 
-            var response = _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
             if (response is null)
                 return NoContent();

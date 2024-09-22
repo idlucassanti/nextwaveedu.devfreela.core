@@ -17,11 +17,11 @@ namespace NextWaveEdu.Devfreela.Application.Queries.Project.GetByIdProject
 
         public async Task<ProjectDetailsViewModel> Handle(GetByIdProjectQuery request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects
+            var project = await _dbContext.Projects
                 .Include(x => x.Owner)
                 .Include(x => x.Freelancer)
                 .Include(x => x.Comments)
-                .SingleOrDefault(x => x.Id == request.Id);
+                .SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (project is null)
                 return null;

@@ -15,14 +15,14 @@ namespace NextWaveEdu.Devfreela.Application.Commands.Project.FinishProject
 
         public async Task<bool> Handle(FinishProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects.SingleOrDefault(x => x.Id == request.Id);
+            var project = await _dbContext.Projects.SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (project is null)
                 return false;
 
             project.Finished();
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }

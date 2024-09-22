@@ -21,7 +21,7 @@ namespace NextWaveEdu.Devfreela.Application.Queries.Project.GetAllProject
             if (projects is null)
                 return null;
 
-            var projectsViewModel = projects.Select(x => new ProjectViewModel(x.Id, x.Title, x.CreatedAt, x.Status)).ToList();
+            var projectsViewModel = await projects.Select(x => new ProjectViewModel(x.Id, x.Title, x.CreatedAt, x.Status)).ToListAsync();
         
             return projectsViewModel;
         }

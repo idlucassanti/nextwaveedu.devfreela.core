@@ -17,9 +17,9 @@ namespace NextWaveEdu.Devfreela.Application.Commands.Project.CreateProject
         {
             var project = new Entity.Project(request.Title, request.Description, request.TotalCost, request.OwnerId, request.FreelancerId);
             
-            _dbContext.Projects.Add(project);
+            await _dbContext.Projects.AddAsync(project);
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return project.Id;
         }

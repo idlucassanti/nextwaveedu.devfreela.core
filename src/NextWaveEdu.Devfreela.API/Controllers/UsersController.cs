@@ -19,11 +19,11 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/users/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var query = new GetByIdUserQuery(id);
 
-            var response = _mediator.Send(query).Result;
+            var response = await _mediator.Send(query);
 
             if (response == null)
             {
@@ -35,18 +35,18 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/users
         [HttpPost]
-        public IActionResult Create([FromBody] CreateUserCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
-            var responseId = _mediator.Send(command).Result;
+            var responseId = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id = responseId }, command);
         }
 
         // api/users/login
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginUserCommand command)
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            var response = _mediator.Send(command).Result;
+            var response = await _mediator.Send(command);
 
             return Ok(response);
         }

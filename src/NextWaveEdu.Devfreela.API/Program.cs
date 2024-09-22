@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NextWaveEdu.Devfreela.API.Constants;
 using NextWaveEdu.Devfreela.Application.Commands.Project.CreateProject;
-using NextWaveEdu.Devfreela.Application.Services;
-using NextWaveEdu.Devfreela.Application.Services.Interfaces;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
 namespace NextWaveEdu.Devfreela.API

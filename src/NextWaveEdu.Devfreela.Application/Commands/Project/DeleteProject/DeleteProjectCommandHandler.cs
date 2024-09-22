@@ -15,14 +15,14 @@ namespace NextWaveEdu.Devfreela.Application.Commands.Project.DeleteProject
 
         public async Task<bool> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects.SingleOrDefault(x => x.Id == request.Id);
+            var project = await _dbContext.Projects.SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (project == null)
                 return false;
 
             project.Cancellated();
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }

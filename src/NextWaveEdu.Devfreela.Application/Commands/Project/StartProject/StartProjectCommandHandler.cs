@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
 namespace NextWaveEdu.Devfreela.Application.Commands.Project.StartProject
@@ -14,14 +15,14 @@ namespace NextWaveEdu.Devfreela.Application.Commands.Project.StartProject
 
         public async Task<bool> Handle(StartProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects.SingleOrDefault(x => x.Id == request.Id);
+            var project = await _dbContext.Projects.SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (project is null)
                 return false;
 
             project.Started();
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }

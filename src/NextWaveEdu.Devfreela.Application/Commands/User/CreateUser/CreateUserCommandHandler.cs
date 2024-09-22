@@ -16,9 +16,9 @@ namespace NextWaveEdu.Devfreela.Application.Commands.User.CreateUser
         {
             var user = new Domain.Entities.User(request.Name, request.Email, request.Password, request.BirthDate);
 
-            _dbContext.Users.Add(user);
+            await _dbContext.Users.AddAsync(user);
 
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return user.Id;
         }

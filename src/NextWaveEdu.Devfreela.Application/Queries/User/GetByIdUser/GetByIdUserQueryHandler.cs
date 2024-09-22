@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NextWaveEdu.Devfreela.Application.ViewModels.User;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 
@@ -15,7 +16,7 @@ namespace NextWaveEdu.Devfreela.Application.Queries.User.GetByIdUser
 
         public async Task<UserViewModel> Handle(GetByIdUserQuery request, CancellationToken cancellationToken)
         {
-            var user = _dbContext.Users.SingleOrDefault(x => x.Id == request.Id);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(x => x.Id == request.Id);
 
             if (user is null)
                 return null;
