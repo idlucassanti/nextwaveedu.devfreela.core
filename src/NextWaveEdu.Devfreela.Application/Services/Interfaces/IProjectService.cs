@@ -5,12 +5,12 @@ namespace NextWaveEdu.Devfreela.Application.Services.Interfaces
 {
     public interface IProjectService
     {
-        List<ProjectViewModel> Get(string query);
+        List<ProjectViewModel> Get(string? query);
         ProjectDetailsViewModel GetById(int id);
         int Create(CreateProjectInputModel input);
         void Update(int id, UpdateProjectInputModel input);
         void Delete(int id);
-        void CreatedComment(int id, CreateCommentInputModel input);
+        void CreateComment(int projectId, CreateCommentInputModel commentInput);
         void Start(int id);
         void Finish(int id);
     }
