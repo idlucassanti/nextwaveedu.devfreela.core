@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using NextWaveEdu.Devfreela.API.Constants;
+using NextWaveEdu.Devfreela.Application.Commands.Project.CreateProject;
 using NextWaveEdu.Devfreela.Application.Services;
 using NextWaveEdu.Devfreela.Application.Services.Interfaces;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
@@ -23,6 +23,8 @@ namespace NextWaveEdu.Devfreela.API
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<ISkillService, SkillService>();
             builder.Services.AddScoped<IUserService, UserService>();
+
+            builder.Services.AddMediatR(options => options.RegisterServicesFromAssembly(typeof(CreateProjectCommand).Assembly));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
