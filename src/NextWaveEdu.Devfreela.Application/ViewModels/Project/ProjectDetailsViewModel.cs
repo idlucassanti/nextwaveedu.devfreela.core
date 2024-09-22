@@ -1,4 +1,5 @@
-﻿using NextWaveEdu.Devfreela.Domain.Entities;
+﻿using NextWaveEdu.Devfreela.Application.ViewModels.User;
+using NextWaveEdu.Devfreela.Domain.Entities;
 using NextWaveEdu.Devfreela.Domain.Enums;
 
 namespace NextWaveEdu.Devfreela.Application.ViewModels.Project
@@ -16,7 +17,9 @@ namespace NextWaveEdu.Devfreela.Application.ViewModels.Project
             ProjectStatusEnum status,
             int ownerId, 
             int freelancerId,
-            List<CommentViewModel> comments
+            List<CommentViewModel> comments,
+            UserViewModel owner,
+            UserViewModel freelancer
         )
         {
             Id = id;
@@ -30,6 +33,8 @@ namespace NextWaveEdu.Devfreela.Application.ViewModels.Project
             OwnerId = ownerId;
             FreelancerId = freelancerId;
             Comments = comments;
+            Owner = owner;
+            Freelancer = freelancer;
         }
 
         public int Id { get; set; }
@@ -43,5 +48,7 @@ namespace NextWaveEdu.Devfreela.Application.ViewModels.Project
         public int OwnerId { get; set; }
         public int FreelancerId { get; set; }
         public List<CommentViewModel> Comments { get; set; }
+        public UserViewModel Owner { get; set; }
+        public UserViewModel Freelancer { get; set; }
     }
 }

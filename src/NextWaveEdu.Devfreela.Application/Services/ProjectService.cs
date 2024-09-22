@@ -3,6 +3,8 @@ using NextWaveEdu.Devfreela.Application.InputModels.Project;
 using NextWaveEdu.Devfreela.Application.ViewModels.Project;
 using NextWaveEdu.Devfreela.Infrastructure.Persistence;
 using NextWaveEdu.Devfreela.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using NextWaveEdu.Devfreela.Application.ViewModels.User;
 
 namespace NextWaveEdu.Devfreela.Application.Services
 {
@@ -37,7 +39,7 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
             //_dbContext.Comments.Add(comment);
 
-            project.Comments.Add(comment);
+            _dbContext.Comments.Add(comment);
 
             _dbContext.SaveChanges();
         }
@@ -67,7 +69,11 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
         public ProjectDetailsViewModel GetById(int id)
         {
-            var project = _dbContext.Projects.FirstOrDefault(x => x.Id.Equals(id));
+            var project = _dbContext.Projects
+                .Include(x => x.Owner)
+                .Include(x => x.Freelancer)
+                .Include(x => x.Comments)
+                .FirstOrDefault(x => x.Id.Equals(id));
 
             if (project is null)
                 return null;
@@ -93,7 +99,9 @@ namespace NextWaveEdu.Devfreela.Application.Services
                 project.Status,
                 project.OwnerId,
                 project.FreelancerId,
-                commentsViewModel
+                commentsViewModel,
+                new UserViewModel(project.Owner.Id, project.Owner.Name, project.Owner.Email, project.Owner.BirthDate),
+                new UserViewModel(project.Freelancer.Id, project.Freelancer.Name, project.Freelancer.Email, project.Freelancer.BirthDate)
             );
 
             return projectDetailsViewModel;
