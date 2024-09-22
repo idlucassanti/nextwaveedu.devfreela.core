@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NextWaveEdu.Devfreela.Application.InputModels.User;
-using NextWaveEdu.Devfreela.Application.Services.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using NextWaveEdu.Devfreela.Application.Commands.User.CreateUser;
+using NextWaveEdu.Devfreela.Application.Commands.User.LoginUser;
+using NextWaveEdu.Devfreela.Application.Queries.User.GetByIdUser;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -8,18 +10,20 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IMediator _mediator;
 
-        public UsersController(IUserService userService)
+        public UsersController(IMediator mediator)
         {
-            _userService = userService;
+            _mediator = mediator;
         }
 
         // api/users/1
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var response = _userService.GetById(id);
+            var query = new GetByIdUserQuery(id);
+
+            var response = _mediator.Send(query).Result;
 
             if (response == null)
             {
@@ -31,18 +35,18 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/users
         [HttpPost]
-        public IActionResult Create([FromBody] CreateUserInputModel createUserModel)
+        public IActionResult Create([FromBody] CreateUserCommand command)
         {
-            var responseId = _userService.Create(createUserModel);
+            var responseId = _mediator.Send(command).Result;
 
-            return CreatedAtAction(nameof(GetById), new { id = responseId }, createUserModel);
+            return CreatedAtAction(nameof(GetById), new { id = responseId }, command);
         }
 
         // api/users/login
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginUserInputModel loginUserModel)
+        public IActionResult Login([FromBody] LoginUserCommand command)
         {
-            var response = _userService.Login(loginUserModel);
+            var response = _mediator.Send(command).Result;
 
             return Ok(response);
         }
