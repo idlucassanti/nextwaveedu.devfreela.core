@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NextWaveEdu.Devfreela.Infrastructure\NextWaveEdu.Devfreela.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
