@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NextWaveEdu.Devfreela.API.Constants;
-using NextWaveEdu.Devfreela.API.Models.Project;
+using NextWaveEdu.Devfreela.Application.InputModels.Project;
+using NextWaveEdu.Devfreela.Application.Services.Interfaces;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -10,43 +11,51 @@ namespace NextWaveEdu.Devfreela.API.Controllers
     public class ProjectsController : ControllerBase
     {
         private readonly OpeningTimeOption _option;
+        private readonly IProjectService _projectService;
 
-        public ProjectsController(IOptions<OpeningTimeOption> option)
+        public ProjectsController(IOptions<OpeningTimeOption> option, IProjectService projectService)
         {
             _option = option.Value;
+            _projectService = projectService;
         }
 
         // api/projects?query=aspnetcore
         [HttpGet]
-        public IActionResult Get(string query)
+        public IActionResult Get(string? query)
         {
-            return Ok();
+            var response = _projectService.Get(query);
+            return Ok(response);
         }
 
         // api/projects/1
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+            var response = _projectService.GetById(id);
+            
+            if (response is null)
+                return NotFound();
 
-            //return NotFound();
-            return Ok();
+            return Ok(response);
         }
 
-        // api/projecets
+        // api/projects
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProjectModel input)
+        public IActionResult Create([FromBody] CreateProjectInputModel input)
         {
             //return BadRequest();
 
+            var responseId = _projectService.Create(input);
+
             // Cadastrar o Projeto
-            return Created(nameof(GetById), new { id = input.Id });
+            return Created(nameof(GetById), new { id = responseId });
         }
 
         // api/projects/1
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateProjectModel input)
+        public IActionResult Put(int id, [FromBody] UpdateProjectInputModel input)
         {
-            // Atualizar o Projeot pelo Id
+            _projectService.Update(id, input);
 
             return NoContent();
         }
@@ -55,16 +64,17 @@ namespace NextWaveEdu.Devfreela.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            //return NotFound();
-
-            // Remoção do id
+            _projectService.Delete(id);
             return NoContent();
+            
+            //return NotFound();
         }
 
         // api/projects/1/comments
         [HttpPost("{id}/comments")]
-        public IActionResult PostCommet(int id, [FromBody] CreateCommentModel createComment)
+        public IActionResult CreateCommet(int id, [FromBody] CreateCommentInputModel input)
         {
+            _projectService.CreateComment(id, input);
             return NoContent();
         }
 
@@ -72,13 +82,16 @@ namespace NextWaveEdu.Devfreela.API.Controllers
         [HttpPut("{id}/start")]
         public IActionResult Start(int id)
         {
+            _projectService.Start(id);
+            
             return NoContent();
         }
 
         // api/projects/1/finish
-        [HttpPut("{id}")]
+        [HttpPut("{id}/finish")]
         public IActionResult Finish(int id)
         {
+            _projectService.Finish(id);
             return NoContent();
         }
     }

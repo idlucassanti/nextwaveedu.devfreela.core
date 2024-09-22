@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NextWaveEdu.Devfreela.API.Models.User;
+using NextWaveEdu.Devfreela.Application.InputModels.User;
 
 namespace NextWaveEdu.Devfreela.API.Controllers
 {
@@ -18,13 +18,14 @@ namespace NextWaveEdu.Devfreela.API.Controllers
 
         // api/users
         [HttpPost]
-        public IActionResult Post([FromBody] CreateUserModel createUserModel)
+        public IActionResult Post([FromBody] CreateUserInputModel createUserModel)
         {
             return CreatedAtAction(nameof(GetById), new { id = createUserModel.Id }, createUserModel);
         }
 
         // api/users/login
-        public IActionResult Login([FromBody] LoginUserModel loginUserModel)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginUserInputModel loginUserModel)
         {
             return NoContent();
         }
