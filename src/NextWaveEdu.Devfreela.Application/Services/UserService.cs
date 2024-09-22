@@ -23,6 +23,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
             _dbContext.Users.Add(user);
 
+            _dbContext.SaveChanges();
+
             return userId;
         }
 

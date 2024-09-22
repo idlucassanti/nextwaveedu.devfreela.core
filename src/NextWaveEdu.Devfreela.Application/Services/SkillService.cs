@@ -23,6 +23,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
 
             _dbContext.Skills.Add(skill);
 
+            _dbContext.SaveChanges();
+
             return id;
         }
 

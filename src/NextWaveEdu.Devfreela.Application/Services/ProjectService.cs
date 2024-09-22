@@ -23,6 +23,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
             
             _dbContext.Projects.Add(project);
 
+            _dbContext.SaveChanges();
+
             return project.Id;
         }
 
@@ -38,6 +40,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
             //_dbContext.Comments.Add(comment);
 
             project.Comments.Add(comment);
+
+            _dbContext.SaveChanges();
         }
 
         public void Delete(int id)
@@ -48,6 +52,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
                 return;
 
             project.Cancellated();
+
+            _dbContext.SaveChanges();
         }
 
         public List<ProjectViewModel> Get(string? query)
@@ -103,6 +109,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
                 return;
 
             project.Started();
+
+            _dbContext.SaveChanges();
         }
 
         public void Finish(int id)
@@ -113,6 +121,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
                 return;
 
             project.Finished();
+
+            _dbContext.SaveChanges();
         }
 
         public void Update(int id, UpdateProjectInputModel input)
@@ -123,6 +133,8 @@ namespace NextWaveEdu.Devfreela.Application.Services
                 return;
 
             project.UpdateInfos(input.Title, input.Description, input.TotalCost);
+
+            _dbContext.SaveChanges();
         }
     }
 }
