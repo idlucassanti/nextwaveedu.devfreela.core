@@ -26,7 +26,9 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
         public decimal TotalCost { get; private set; }
         public ProjectStatusEnum Status { get; private set; }
         public int OwnerId { get; private set; }
+        public User Owner { get; set; }
         public int FreelancerId { get; private set; }
+        public User Freelancer { get; private set; }
         public List<Comment> Comments { get; private set; }
 
         public void Cancellated()

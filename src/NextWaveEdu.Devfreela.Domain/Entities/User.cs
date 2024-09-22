@@ -16,6 +16,7 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
             Skills = new List<UserSkill>();
             OwnerProjects = new List<Project>();
             FreelaProjects = new List<Project>();
+            Comments = new List<Comment>();
         }
 
         public string Name { get; private set; }
@@ -27,5 +28,6 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
         public List<UserSkill> Skills { get; private set; }
         public List<Project> OwnerProjects { get; private set; }
         public List<Project> FreelaProjects { get; private set; }
+        public List<Comment> Comments { get; set; }
     }
 }

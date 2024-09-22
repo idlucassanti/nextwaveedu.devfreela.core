@@ -15,6 +15,8 @@ namespace NextWaveEdu.Devfreela.Domain.Entities
         public string Content { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public int ProjectId { get; private set; }
+        public virtual Project Project { get; set; }
         public int UserId { get; private set; }
+        public virtual User User { get; set; }
     }
 }
